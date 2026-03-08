@@ -1,8 +1,8 @@
 import axios from "axios"
-const geminiResponse=async (command,assistantName,userName)=>{
-try {
-    const apiUrl=process.env.GEMINI_API_URL
-    const prompt = `You are a virtual assistant named ${assistantName} created by ${userName}. 
+const geminiResponse = async (command, assistantName, userName) => {
+    try {
+        const apiUrl = process.env.GEMINI_API_URL
+        const prompt = `You are a virtual assistant named ${assistantName} created by ${userName}. 
 You are not Google. You will now behave like a voice-enabled assistant.
 
 Your task is to understand the user's natural language input and respond with a JSON object like this:
@@ -46,15 +46,15 @@ now your userInput- ${command}
 
 
 
-    const result=await axios.post(apiUrl,{
-    "contents": [{
-    "parts":[{"text": prompt}]
-    }]
-    })
-return result.data.candidates[0].content.parts[0].text
-} catch (error) {
-    console.log(error)
-}
+        const result = await axios.post(apiUrl, {
+            "contents": [{
+                "parts": [{ "text": prompt }]
+            }]
+        })
+        return result.data.candidates[0].content.parts[0].text
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 export default geminiResponse
